@@ -39,4 +39,3 @@ jobs:
         with:
           name: maven-artifacts
           path: target
-          path: target/
