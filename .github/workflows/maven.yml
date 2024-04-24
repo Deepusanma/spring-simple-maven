@@ -46,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: maven-artifacts
-          
+
       - name: Set JAR file name
         run: echo "JAR_FILE=$(ls ${{ github.workspace }}/target/*.jar)" >> $GITHUB_ENV
 
