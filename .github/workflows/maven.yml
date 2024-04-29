@@ -57,7 +57,7 @@ jobs:
       - name: Upload artifact to S3
         run: aws s3 cp /home/runner/work/spring-simple-maven/spring-simple-maven/mb2g-spring-boot-0.0.1-SNAPSHOT.jar s3://devtest-deployment/maven-artifacts.jar
 
-    Deploy-to-EC2:
+  Deploy-to-EC2:
     needs: Deploy-to-S3
     runs-on: ubuntu-latest
     steps:
