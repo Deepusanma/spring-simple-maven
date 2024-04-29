@@ -66,11 +66,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Debug SSH Key
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy.pem
-          cat deploy.pem
-          ls -l deploy.pem
 
       - name: Download artifact from S3 using curl
         run: curl -o maven-artifacts.jar https://devtest-deployment.s3.amazonaws.com/maven-artifacts.jar
