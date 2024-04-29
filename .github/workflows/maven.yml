@@ -67,7 +67,8 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Download artifact from S3
-        run: aws s3 cp s3://devtest-deployment/maven-artifacts.jar /home/runner/maven-artifacts.jar
+        run: aws s3 cp s3://devtest-deployment/maven-artifacts.jar /home/runner/maven-artifacts.jar --debug
+
 
       - name: Copy artifact to EC2
         run: scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} /home/runner/maven-artifacts.jar ec2-user@13.211.202.84
