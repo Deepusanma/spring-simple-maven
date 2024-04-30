@@ -70,8 +70,9 @@ jobs:
       - name: Download artifact from S3 using curl
         run: curl -o maven-artifacts.jar https://devtest-deployment.s3.amazonaws.com/maven-artifacts.jar
 
+      
       - name: Copy artifact to EC2 instance
-        run: aws s3 cp s3://devtest-deployment/maven-artifacts.jar deploy/
+        run: aws s3 cp s3://devtest-deployment/maven-artifacts.jar ec2-user@54.252.251.169:deploy/
 
 
       - name: SSH into EC2 instance and run JAR
