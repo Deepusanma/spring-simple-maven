@@ -67,6 +67,9 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+     
       - name: SSH into EC2 instance and copy artifact
         run: |
-         ssh -o StrictHostKeyChecking=no -i "deploy.pem" ec2-user@ec2-54-252-251-169.ap-southeast-2.compute.amazonaws.com 'aws s3 cp s3://devtest-deployment/maven-artifacts.jar /deploy'
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy.pem
+          chmod 600 deploy.pem
+          ssh -o StrictHostKeyChecking=no -i deploy.pem ec2-user@ec2-54-252-251-169.ap-southeast-2.compute.amazonaws.com 'aws s3 cp s3://devtest-deployment/maven-artifacts.jar /home/ec2-user/deploy/'
