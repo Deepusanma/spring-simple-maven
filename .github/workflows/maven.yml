@@ -52,7 +52,6 @@ jobs:
         run: aws s3 cp /home/runner/work/spring-simple-maven/spring-simple-maven/cicd/Instanceparam.json s3://cfdeployment/
                
   Deploy-to-EC2:
-    needs: Deploy-to-S3
     runs-on: ubuntu-latest
     steps:
       - name: Configure SSH Key
