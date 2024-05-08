@@ -30,11 +30,7 @@ jobs:
         with:
           name: maven-artifacts
           path: target
-
-  Deploy-to-S3:
-    needs: Review-code-and-build
-    runs-on: ubuntu-latest
-    steps:
+          
       - name: Download Maven artifacts
         uses: actions/download-artifact@v2
         with:
