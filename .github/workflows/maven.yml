@@ -51,7 +51,7 @@ jobs:
         run: aws s3 cp /home/runner/work/spring-simple-maven/spring-simple-maven/mb2g-spring-boot-0.0.1-SNAPSHOT.jar s3://devtest-deployment/maven-artifacts.jar
 
       - name: Upload CF Script to S3
-        run: aws s3 cp cicd/Instanceparam.json s3://cfdeployment/
+        run: aws s3 cp ${{ github.workspace }}/cicd/Instanceparam.json s3://cfdeployment/
                
   Deploy-to-EC2:
     needs: Deploy-to-S3
