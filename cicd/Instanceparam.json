@@ -1,0 +1,70 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "EC2 instance using user data",
+  "Parameters": {
+    "InstanceType": {
+      "Type": "String",
+      "Default": "t2.micro",
+      "AllowedValues": ["t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large"]
+    },
+    "KeyNameParam": {
+      "Type": "String",
+      "Description": "Enter the name of the Existing EC2 key-value pair"
+    },
+    "ArtifactBucket": {
+      "Type": "String",
+      "Description": "S3 bucket name where the artifact is stored"
+    },
+    "ArtifactKey": {
+      "Type": "String",
+      "Description": "S3 key for the artifact"
+    }
+  },
+  "Resources": {
+    "InstanceSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable SSH access via port 22",
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      }
+    },
+    "EC2Instance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "SecurityGroups": [{"Ref": "InstanceSecurityGroup"}],
+        "InstanceType": {"Ref": "InstanceType"},
+        "ImageId": "ami-0ec0514235185af79",
+        "KeyName": {"Ref": "KeyNameParam"},
+        "Tags":[
+          {
+            "Key":"Name",
+            "Value":"TestServer"
+          }
+        ],
+        "UserData": {
+          "Fn::Base64": {
+            "Fn::Join": [
+              "",
+              [
+                "#!/bin/bash\n",
+                "echo 'Welcome To AWS Cloudformation build and deployment!' > /Sample.txt\n",
+                "aws s3 cp s3://",
+                {"Ref": "ArtifactBucket"},
+                "/",
+                {"Ref": "ArtifactKey"},
+                " /home/ec2-user/"
+              ]
+            ]
+          }
+        }
+      }
+    }
+  }
+}
