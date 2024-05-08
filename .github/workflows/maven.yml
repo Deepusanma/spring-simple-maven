@@ -46,6 +46,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-southeast-2
+      - name: List contents of the directory
+        run: ls -R /home/runner/work/spring-simple-maven/spring-simple-maven/cicd/
 
       - name: Upload artifact to S3
         run: aws s3 cp /home/runner/work/spring-simple-maven/spring-simple-maven/mb2g-spring-boot-0.0.1-SNAPSHOT.jar s3://devtest-deployment/maven-artifacts.jar
