@@ -29,6 +29,6 @@ jobs:
           capabilities: CAPABILITY_NAMED_IAM
           parameter-overrides: |
             InstanceType=t2.micro
-            KeyNameParam=${{ secrets.MY_SECRET_VALUE }}
+            KeyNameParam=${{ secrets.SSH_PRIVATE_KEY }}
             ArtifactBucket=devtest-deployment
-            ArtifactKey=maven-artifacts.jar
+            ArtifactKey=https://devtest-deployment.s3.ap-southeast-2.amazonaws.com/maven-artifacts.jar
