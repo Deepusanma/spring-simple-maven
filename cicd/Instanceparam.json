@@ -49,16 +49,20 @@
           }
         ],
         "UserData": {
-        "Fn::Base64": {
-        "Fn::Sub": [
-           "#!/bin/bash\n",
-            "echo 'Welcome To AWS Cloudformation build and deployment!' > /Sample.txt\n",
-             "aws s3 cp s3://${ArtifactBucket}/${ArtifactKey} /home/ec2-user/"
-                    ]
-     }
-      }
-
-      }
-    }
+       "Fn::Base64": {
+       "Fn::Join": [
+      "",
+      [
+        "#!/bin/bash\n",
+        "echo 'Welcome To AWS Cloudformation build and deployment!' > /Sample.txt\n",
+        {
+          "Fn::Sub": "aws s3 cp s3://${ArtifactBucket}/${ArtifactKey} /home/ec2-user/"
+        }
+      ]
+    ]
   }
+}
+}
+}
+}
 }
