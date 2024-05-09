@@ -59,6 +59,19 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Deploy CloudFormation Stack
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+          name: my-stack
+          region: ap-southeast-3
+          template: s3://cfdeployment/Instanceparam.json
+          capabilities: CAPABILITY_NAMED_IAM
+          parameter-overrides: |
+           InstanceType=t2.micro
+           KeyNameParam=${{ secrets.MY_SECRET_VALUE }}
+           ArtifactBucket=cfdeployment
+           ArtifactKey=https://cfdeployment.s3.ap-southeast-2.amazonaws.com/Instanceparam.json
+
      
       - name: SSH into EC2 instance and copy artifact
         run: |
