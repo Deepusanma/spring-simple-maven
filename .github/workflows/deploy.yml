@@ -1,0 +1,37 @@
+name: CloudFormation deployment
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+    
+jobs:
+   Deploy-to-EC2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure SSH Key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+     
+      - name: Deploy CloudFormation Stack
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+         name: my-stack
+         template: s3://cfdeployment/Instanceparam.json
+         capabilities: CAPABILITY_NAMED_IAM
+         parameter-overrides: |
+          InstanceType=t2.micro
+          KeyNameParam=${{ secrets.SSH_PRIVATE_KEY }}
+          ArtifactBucket=cfdeployment
+          ArtifactKey=https://cfdeployment.s3.ap-southeast-2.amazonaws.com/Instanceparam.json
+
+
+     
+      - name: SSH into EC2 instance and copy artifact
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy.pem
+          chmod 600 deploy.pem
+          ssh -o StrictHostKeyChecking=no -i deploy.pem ec2-user@ec2-52-62-10-21.ap-southeast-2.compute.amazonaws.com 'aws s3 cp s3://devtest-deployment/maven-artifacts.jar /home/ec2-user/deploy/'
