@@ -2,7 +2,7 @@ name: CloudFormation Deployment
 
 on:
   workflow_run:
-    workflows: ["Java CI with Maven Build and S3 Upload"]
+    workflows: ["Java CI with Maven Build and S3 Deployment"]
     types:
       - completed
 
