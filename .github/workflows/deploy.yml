@@ -27,8 +27,5 @@ jobs:
          name: my-stack
          template: https://cfdeployment.s3.ap-southeast-2.amazonaws.com/Instanceparam.json
          capabilities: CAPABILITY_NAMED_IAM
-         parameter-overrides: |
-          ArtifactBucket=devtest-deployment
-          ArtifactKey=https://devtest-deployment.s3.ap-southeast-2.amazonaws.com/maven-artifacts.jar
-          InstanceType=t2.micro
-          KeyNameParam=deploy
+         parameter-overrides: "InstanceType=t2.micro,KeyNameParam=deploy,ArtifactBucket=devtest-deployment,ArtifactKey=https://devtest-deployment.s3.ap-southeast-2.amazonaws.com/maven-artifacts.jar"
+
