@@ -50,7 +50,19 @@ jobs:
 
       - name: Upload CF Script to S3
         run: aws s3 cp /home/runner/work/spring-simple-maven/spring-simple-maven/cicd/Instanceparam.json s3://cfdeployment/
-               
+       
+      - name: Deploy CloudFormation Stack
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+          name: my-stack
+          region: ap-southeast-2
+          template: s3://cfdeployment/Instanceparam.json
+          capabilities: CAPABILITY_NAMED_IAM
+          parameter-overrides: |
+           InstanceType=t2.micro
+           KeyNameParam=${{ secrets.MY_SECRET_VALUE }}
+           ArtifactBucket=cfdeployment
+           ArtifactKey=https://cfdeployment.s3.ap-southeast-2.amazonaws.com/Instanceparam.json            
   Deploy-to-EC2:
     runs-on: ubuntu-latest
     steps:
