@@ -8,6 +8,6 @@ public class Mb2gSpringBootApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Mb2gSpringBootApplication.class, args);
-	}
+	
 
 
