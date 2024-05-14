@@ -10,5 +10,4 @@ public class Mb2gSpringBootApplication {
 		SpringApplication.run(Mb2gSpringBootApplication.class, args);
 	}
 
-}
 
