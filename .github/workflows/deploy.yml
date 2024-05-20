@@ -27,5 +27,4 @@ jobs:
          template: https://cfdeployment.s3.ap-southeast-2.amazonaws.com/Instanceparam.json
          capabilities: CAPABILITY_NAMED_IAM
          parameter-overrides: "InstanceType=t2.micro,KeyNameParam=deploy,ArtifactBucket=devtest-deployment,ArtifactKey=https://devtest-deployment.s3.ap-southeast-2.amazonaws.com/maven-artifacts.jar"
-         no-fail-on-empty-changeset: "1"
 
