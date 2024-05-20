@@ -29,6 +29,6 @@ jobs:
          parameter-overrides: "InstanceType=t2.micro,KeyNameParam=deploy,ArtifactBucket=devtest-deployment,ArtifactKey=https://devtest-deployment.s3.ap-southeast-2.amazonaws.com/maven-artifacts.jar"
 
       - name: Wait for CloudFormation Stack to Complete
-        uses: aws-actions/aws-cloudformation-wait-for-stack@v1
+        uses: aws-actions/aws-cloudformation-wait-for-stack@v2
         with:
           stack-name: my-stack
