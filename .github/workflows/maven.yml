@@ -55,9 +55,10 @@ jobs:
         run: aws s3 cp ./cicd/Instanceparam.json s3://cfdeployment/
 
       - name: Notify Slack
+        uses: 8398a7/action-slack@v3
         if: always()
-        uses: rtCamp/action-slack-notify@v2.1.0
         with:
           status: ${{ job.status }}
+          fields: repo,commit,author
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
