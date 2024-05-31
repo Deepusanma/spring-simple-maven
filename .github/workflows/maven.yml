@@ -54,11 +54,10 @@ jobs:
       - name: Upload CF Script to S3
         run: aws s3 cp ./cicd/Instanceparam.json s3://cfdeployment/
 
-      - name: Notify Slack of Job Status
+      - name: Notify Slack
         if: always()
         uses: rtCamp/action-slack-notify@v2.1.0
         with:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           status: ${{ job.status }}
         env:
-          CI: true
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
