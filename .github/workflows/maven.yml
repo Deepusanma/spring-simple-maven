@@ -54,11 +54,11 @@ jobs:
       - name: Upload CF Script to S3
         run: aws s3 cp ./cicd/Instanceparam.json s3://cfdeployment/
 
-      - name: Notify Slack
-        uses: 8398a7/action-slack@v3
-        if: always()
-        with:
-          status: ${{ job.status }}
-          fields: repo,commit,author
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+     # - name: Notify Slack
+      #  uses: 8398a7/action-slack@v3
+      #   if: always()
+     #   with:
+      #    status: ${{ job.status }}
+      #    fields: repo,commit,author
+     #   env:
+      #    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
