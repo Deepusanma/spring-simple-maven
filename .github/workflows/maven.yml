@@ -27,7 +27,14 @@ jobs:
 
       - name: Test
         run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
-
+     
+      - name: Checkout another repository
+        uses: actions/checkout@v4
+        with:
+          repository: Deepusanma/Demo
+          path: Demo
+          ref: master
+    
       - name: Upload Maven artifacts
         uses: actions/upload-artifact@v2
         with:
